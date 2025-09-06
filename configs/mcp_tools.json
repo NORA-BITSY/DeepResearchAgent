@@ -1,0 +1,131 @@
+{
+  "servers": [
+    {
+      "id": "tavily",
+      "name": "Tavily Search & Crawl",
+      "description": "Real-time web search with extract/map/crawl capabilities",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@tavily/mcp"],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      },
+      "agents": ["deep_researcher_agent", "browser_use_agent"]
+    },
+    {
+      "id": "exa",
+      "name": "Exa Precision Search",
+      "description": "High-quality search with fresh web sets",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "exa-mcp"],
+      "env": {
+        "EXA_API_KEY": "${EXA_API_KEY}"
+      },
+      "agents": ["deep_researcher_agent"]
+    },
+    {
+      "id": "firecrawl",
+      "name": "Firecrawl Advanced Crawler",
+      "description": "JS rendering, site-level crawl, batch extraction",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp-server"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      },
+      "agents": ["deep_researcher_agent", "browser_use_agent"]
+    },
+    {
+      "id": "fetch",
+      "name": "Fetch Reference",
+      "description": "Simple fetch to Markdown converter",
+      "transport": "stdio",
+      "command": "python",
+      "args": ["-m", "mcp_server_fetch"],
+      "agents": ["deep_researcher_agent", "general_tool_agent"]
+    },
+    {
+      "id": "puremd",
+      "name": "Pure.md Unblocker",
+      "description": "Unblock and extract pipeline with search",
+      "transport": "http",
+      "url": "https://mcp.pure.md",
+      "env": {
+        "PUREMD_API_KEY": "${PUREMD_API_KEY}"
+      },
+      "agents": ["browser_use_agent"]
+    },
+    {
+      "id": "markitdown",
+      "name": "MarkItDown Converter",
+      "description": "Convert PDF, DOCX, PPTX, images to Markdown",
+      "transport": "stdio",
+      "command": "uvx",
+      "args": ["markitdown-mcp-server"],
+      "agents": ["deep_analyzer_agent"]
+    },
+    {
+      "id": "qdrant",
+      "name": "Qdrant Memory",
+      "description": "Semantic memory layer for persistence",
+      "transport": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-qdrant"],
+      "env": {
+        "QDRANT_URL": "${QDRANT_URL:-http://localhost:6333}",
+        "QDRANT_API_KEY": "${QDRANT_API_KEY}",
+        "QDRANT_COLLECTION": "${QDRANT_COLLECTION:-deep_research}"
+      },
+      "agents": ["general_tool_agent", "planning_agent"]
+    },
+    {
+      "id": "github",
+      "name": "GitHub Integration",
+      "description": "Access issues, PRs, files from repositories",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "agents": ["deep_analyzer_agent", "deep_researcher_agent"]
+    },
+    {
+      "id": "notion",
+      "name": "Notion Integration",
+      "description": "Fetch, search, author notes and docs",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@makenotion/mcp-server-notion"],
+      "env": {
+        "NOTION_TOKEN": "${NOTION_TOKEN}"
+      },
+      "agents": ["deep_researcher_agent", "deep_analyzer_agent"]
+    },
+    {
+      "id": "filesystem",
+      "name": "Filesystem Access",
+      "description": "Local file operations",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "env": {
+        "FILE_ACCESS_ROOT": "${FILE_ACCESS_ROOT:-./data}"
+      },
+      "agents": ["general_tool_agent", "deep_analyzer_agent"]
+    }
+  ],
+  "defaults": {
+    "timeout": 30000,
+    "retry_attempts": 3,
+    "cache_ttl": 3600
+  },
+  "priority_order": [
+    "tavily",
+    "exa",
+    "firecrawl",
+    "fetch",
+    "puremd"
+  ]
+}
