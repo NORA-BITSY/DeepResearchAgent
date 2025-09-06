@@ -172,7 +172,6 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-
 # Data
 data/
 .DS_Store
@@ -181,3 +180,87 @@ data/
 workdir/
 
 others/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Build artifacts and generated files
+tools/browser/http_server/build/
+*.mjs.map
+*.sandbox.mjs
+*.worker.mjs
+
+# Logs
+logs/
+*.log
+log.txt
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Secrets and local configs
+secrets.json
+local_config.json
+config_local.py
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache directories
+.cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Coverage reports
+.coverage
+htmlcov/
+coverage.xml
+
+# Test artifacts
+.pytest_cache/
+.tox/
+.nox/
+
+# Documentation build
+docs/_build/
+docs/build/
+
+# Node.js (if any frontend components)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+.dockerignore
+
+# Kubernetes
+*.yaml.bak
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Project specific
+# Add any project-specific patterns here
